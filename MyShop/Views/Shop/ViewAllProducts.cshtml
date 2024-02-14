@@ -2,57 +2,64 @@
 @model ViewModelShopViewAllProducts
 
 <div class="container d-flex flex-column">
-<form class="mb-1 mt-1" asp-action="ViewAllProducts" asp-controller="Shop" method="post">
-	<div class="row">
-		<div class="col-6 d-flex justify-content-center">
-			<label class="fw-bold" style="letter-spacing: .2rem;">Category</label>
-		</div>
-		<div class="col-6 d-flex justify-content-center">
-			<label class="fw-bold" style="letter-spacing: .2rem;">Price</label>
-		</div>
-		<div class="w-100"></div>
-		<div class="col-6 d-flex justify-content-center">
-			<select class="text-center w-75 text-secondary" name="Category" >
-				@{
-					foreach (var category in Model.Categories)
-					{
-						<option class="form-select">@category.Name</option>
+	<form class="mb-1 mt-1" asp-action="ViewAllProducts" asp-controller="Shop" method="post">
+		<div class="row">
+			<div class="col-6 d-flex justify-content-center">
+				<label class="fw-bold" style="letter-spacing: .2rem;">Category</label>
+			</div>
+			<div class="col-6 d-flex justify-content-center">
+				<label class="fw-bold" style="letter-spacing: .2rem;">Price</label>
+			</div>
+			<div class="w-100"></div>
+			<div class="col-6 d-flex justify-content-center">
+				<select class="text-center w-75 text-secondary" name="Category">
+					@{
+						foreach (var category in Model.Categories)
+						{
+							<option class="form-select">@category.Name</option>
+						}
 					}
-				}
-			</select>
-		</div>
-		<div class="col-6">
-			<div class="row">
-				<div class="col-6 d-flex">
-					<input class="w-100 text-center ms-2 me-2" placeholder="From" type="number" name="From" />
-				</div>
-				<div class="col-6 d-flex">
+				</select>
+			</div>
+			<div class="col-6">
+				<div class="row">
+					<div class="col-6 d-flex">
+						<input class="w-100 text-center ms-2 me-2" placeholder="From" type="number" name="From" />
+					</div>
+					<div class="col-6 d-flex">
 						<input class="w-100 text-center ms-2 me-2" placeholder="To" type="number" name="To" />
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-12 d-flex justify-content-center">
-			<button type="submit" class="btn btn-success w-50 mt-2 mb-2" style="letter-spacing: 1rem;">Search</button>
-		</div>
+			<div class="col-12 d-flex justify-content-center">
+				<button type="submit" class="btn btn-success w-50 mt-2 mb-2" style="letter-spacing: 1rem;">Search</button>
+			</div>
 
-	</div>
-</form>
-<div class="row">
-@{
-	foreach(var prod in Model.Products)
-	{
-		<div class="col-3">
-			<div class="card ">
-				<img class="card-img-top" src="@prod.ImagePath" alt="Card image cap">
-				<div class="card-body">
-					<h5 class="card-title">@prod.Name</h5>
-					<h6 class="card-subtitle">@prod.Price ₴</h6>
-				</div>
-			</div>
 		</div>
-	}
-}
-</div>
+	</form>
+	<div class="row">
+		@{
+			foreach (var prod in Model.Products)
+			{
+				<div class="col-3">
+					<div class="card">
+						<form asp-action="ViewInformationOfProduct" asp-controller="Shop" method="post">
+							<input type="hidden" class="d-none" name="ProductId" value="@prod.Id" />
+							<button style="border:none; padding:0px;" type="submit">
+								<img class="card-img-top" src="@prod.ImagePath" alt="Card image cap">
+							</button>
+						</form>
+						<div class="card-body text-center">
+							<h5 class="card-title">@prod.Name</h5>
+							<h6 class="card-subtitle">@prod.Price ₴</h6>
+						</div>
+
+					</div>
+				</div>
+
+			}
+		}
+	</div>
 </div>
 
 
