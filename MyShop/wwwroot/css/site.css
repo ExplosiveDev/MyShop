@@ -1,3 +1,9 @@
 .DivImg{
     min-height:100px;
 }
+.img-btn {
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+}
