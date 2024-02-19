@@ -1,7 +1,10 @@
 
 using DataAccess;
 using DataAccess.Context;
+using DataAccess.Entities;
 using DataAccess.Interfaces;
+using DataAccess.Seeder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MyShop.Interfaces;
 using MyShop.Services;
@@ -16,6 +19,8 @@ string connection = builder.Configuration.GetConnectionString("ShopDBcontext") ?
 
 builder.Services.AddDbContext<ShopDBcontext>(options => options.UseSqlServer(connection));
 
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>().AddEntityFrameworkStores<ShopDBcontext>();
+
 //add Repository for all entities
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
@@ -26,6 +31,13 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+	var services = serviceScope.ServiceProvider;
+	Seeder.SeedRoles(services).Wait();
+	Seeder.SeedAdmin(services).Wait();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -43,6 +55,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -26,5 +26,21 @@ namespace DataAccess.Configuration
                    .HasForeignKey(x => x.CategoryId);
 
         }
-    }
+		public void Configure(EntityTypeBuilder<User> builder)
+		{
+
+			//Set Primary Key
+			builder.HasKey(x => x.Id);
+
+			//Set Property configurations
+			builder.Property(x => x.FirstName)
+				   .HasMaxLength(180)
+				   .IsRequired();
+
+			builder.Property(x => x.LastName)
+				   .HasMaxLength(1024);
+
+
+		}
+	}
 }
