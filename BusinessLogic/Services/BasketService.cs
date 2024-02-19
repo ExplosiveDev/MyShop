@@ -26,10 +26,11 @@ namespace BusinessLogic.Services
 		{
 			var basket = GetUserBasket(UserName).Result;
 			if(basket.Products.Where(x => x.Id == ProductId).FirstOrDefault() != null) 
-			{ 
-			}
-			basket.Products.Add(await _productRepository.GetByID(ProductId));
-			await _basketRepository.Update(basket);
+			{
+                basket.Products.Add(await _productRepository.GetByID(ProductId));
+                await _basketRepository.Update(basket);
+            }
+
 		}
 
 		public async Task DeleteFromBasket(int BasketId)
@@ -44,8 +45,9 @@ namespace BusinessLogic.Services
 		}
 		private async Task<Basket> GetUserBasket(string UserName)
 		{
-			var basket = _basketRepository.Get().Result.Where(x => x.UserName == UserName).FirstOrDefault();
-			if (basket == null)
+            var baskets = await _basketRepository.Get(includeProperties: new[] { "Products" });
+            var basket = baskets.FirstOrDefault(x => x.UserName == UserName);
+            if (basket == null)
 			{
 				Basket NewBasket = new Basket();
 				NewBasket.UserName = UserName;

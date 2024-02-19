@@ -55,7 +55,7 @@ namespace MyShop.Controllers
         public async Task<IActionResult> AddInBasket(int ProductId, string UserName)
         {
             await _basket.AddInBasket(ProductId, UserName);
-            return RedirectToAction("ViewInformationOfProduct", ProductId);
+            return RedirectToAction("ViewAllProducts");
 		}
 
     }
