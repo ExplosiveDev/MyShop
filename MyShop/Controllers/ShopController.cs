@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BusinessLogic.Interfaces;
+using DataAccess.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyShop.Interfaces;
 using MyShop.Models;
@@ -9,10 +12,12 @@ namespace MyShop.Controllers
     {
         private readonly IProductService _products;
         private readonly ICategoryService _category;
-        public ShopController(IProductService product, ICategoryService category)
+        private readonly IBasketService _basket;
+		public ShopController(IProductService product, ICategoryService category, IBasketService basket)
         {
             _products = product;
             _category = category;
+            _basket = basket;
         }
         [HttpGet]
         public async Task<IActionResult> ViewAllProducts()
@@ -44,9 +49,14 @@ namespace MyShop.Controllers
         [HttpPost]
 		public async Task<IActionResult> ViewInformationOfProduct(int ProductId)
         {
-            var prod = await _products.GetById(ProductId);
-            return View(prod);
+			var prod = await _products.GetById(ProductId);
+			return View(prod);
         }
+        public async Task<IActionResult> AddInBasket(int ProductId, string UserName)
+        {
+            await _basket.AddInBasket(ProductId, UserName);
+            return RedirectToAction("ViewInformationOfProduct", ProductId);
+		}
 
-	}
+    }
 }

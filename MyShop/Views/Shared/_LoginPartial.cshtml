@@ -11,7 +11,11 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
-    
+    <li class="nav-item d-flex align-items-center">
+            <a asp-action="Basket" asp-controller="Shop">
+                <img src="~/icon/basket.png" style="width:30px; height:30px;" />
+            </a>
+    </li>
     <li class="nav-item">
         <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @user.FirstName @user.LastName </a>
     </li>

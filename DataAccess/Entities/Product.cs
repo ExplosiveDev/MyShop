@@ -16,5 +16,6 @@ namespace DataAccess.Entities
         public string? ImagePath { get; set; }
         public int CategoryId { get; set; }
         public Category? Category { get; set; }
+        public ICollection<Basket> Baskets { get; set; }
     }
 }

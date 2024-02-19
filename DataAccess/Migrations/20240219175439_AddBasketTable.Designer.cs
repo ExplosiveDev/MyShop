@@ -4,6 +4,7 @@ using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ShopDBcontext))]
-    partial class ShopDBcontextModelSnapshot : ModelSnapshot
+    [Migration("20240219175439_AddBasketTable")]
+    partial class AddBasketTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("ProductsId");
 
-                    b.ToTable("BasketProduct", (string)null);
+                    b.ToTable("BasketProduct");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Basket", b =>
@@ -51,7 +54,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("baskets", (string)null);
+                    b.ToTable("baskets");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Category", b =>
@@ -68,7 +71,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("categories", (string)null);
+                    b.ToTable("categories");
 
                     b.HasData(
                         new
@@ -116,7 +119,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("products", (string)null);
+                    b.ToTable("products");
 
                     b.HasData(
                         new
