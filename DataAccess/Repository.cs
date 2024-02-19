@@ -51,11 +51,13 @@ namespace DataAccess
         public async Task Insert(TEntity entity)
         {
             await dbSet.AddAsync(entity);
-        }
+			await Save();
+		}
         public async Task Delete(object id)
         {
             TEntity entityToDelete = dbSet.Find(id);
             await Delete(entityToDelete);
+            await Save();
         }
         public async Task Delete(TEntity entityToDelete)
         {
@@ -64,7 +66,8 @@ namespace DataAccess
                 dbSet.Attach(entityToDelete);
             }
             dbSet.Remove(entityToDelete);
-        }
+			await Save();
+		}
         public async Task Update(TEntity entityToUpdate)
         {
             await Task.Run
@@ -74,6 +77,7 @@ namespace DataAccess
                     dbSet.Attach(entityToUpdate);
                     _context.Entry(entityToUpdate).State = EntityState.Modified;
                 });
+            await Save();
         }
         public async Task Save()
         {

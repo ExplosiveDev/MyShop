@@ -33,8 +33,32 @@
             @RenderBody()
     </div>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" ></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        Swal.fire("SweetAlert2 is working!");
+        $('#SaveInCart').on("click", function () {
+
+            $.ajax({
+                url: '@Url.Action("AddInBasket","Shop")',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    Swal.fire("SweetAlert2 is working!+");
+                },
+                failure: function () {
+                    Swal.fire("SweetAlert2 is working!-");
+
+                }
+            });
+        });
+    </script>
+
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

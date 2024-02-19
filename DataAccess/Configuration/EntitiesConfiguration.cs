@@ -4,15 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Configuration
 {
-    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    public class ProductConfiguration
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
 
-            //Set Primary Key
             builder.HasKey(x => x.Id);
 
-            //Set Property configurations
             builder.Property(x => x.Name)
                    .HasMaxLength(180)
                    .IsRequired();
@@ -20,7 +18,6 @@ namespace DataAccess.Configuration
             builder.Property(x => x.Description)
                    .HasMaxLength(1024);
 
-            //Set Relationship configurations
             builder.HasOne(x => x.Category)
                    .WithMany(x => x.Products)
                    .HasForeignKey(x => x.CategoryId);
@@ -29,10 +26,8 @@ namespace DataAccess.Configuration
 		public void Configure(EntityTypeBuilder<User> builder)
 		{
 
-			//Set Primary Key
 			builder.HasKey(x => x.Id);
 
-			//Set Property configurations
 			builder.Property(x => x.FirstName)
 				   .HasMaxLength(180)
 				   .IsRequired();
@@ -40,7 +35,15 @@ namespace DataAccess.Configuration
 			builder.Property(x => x.LastName)
 				   .HasMaxLength(1024);
 
-
 		}
-	}
+        public void Configure(EntityTypeBuilder<Basket> builder)
+        {
+
+            builder.HasKey(x => x.Id);
+
+            builder.HasMany(x => x.Products)
+                .WithMany(x => x.Baskets);
+
+        }
+    }
 }
