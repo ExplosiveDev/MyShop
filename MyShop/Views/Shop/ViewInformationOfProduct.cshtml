@@ -1,4 +1,21 @@
 ﻿@using BusinessLogic.DTOs
 @model ProductDTO
+<div class="row">
+	<div class="col-6 d-flex justify-content-center">
+		<img style="max-width:400px; min-width:400px; max-height: 500px;" src="@Model.ImagePath" />
+	</div>
+	<div class="col-6 d-flex justify-content-center flex-column">
+		<div class="d-flex justify-content-center flex-column">
+			<h1>@Model.Name</h1>
+			<h2 class="text-success">@Model.Price ₴</h2>
+			<h5>@Model.Description</h5>
+			<form>
+				<div class="d-flex justify-content-center">
+					<input hidden class="d-none" value="@Model.Id" name="ProductId" />
+					<button type="submit" class=" btn w-50 btn-success">In card</button>
+				</div>
+			</form>
+		</div>
 
-<h1>@Model.Name ||| @Model.Price</h1>
+	</div>
+</div>

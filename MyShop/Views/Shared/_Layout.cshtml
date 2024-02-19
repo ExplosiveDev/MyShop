@@ -24,21 +24,15 @@
                         <a class="nav-link" href="#">Account </a>
                     </li>
                 </ul>
- 
             </div>
+            <partial name="_LoginPartial"></partial>
         </nav>
+        
     </header>
-    <div class="container-fluid ">
+    <div class="container mt-2">
             @RenderBody()
-
     </div>
 
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - MyShop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

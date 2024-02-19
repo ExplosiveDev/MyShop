@@ -1,5 +1,6 @@
 ﻿using DataAccess.Entities;
 using DataAccess.Seeder;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Context
 {
-    public class ShopDBcontext : DbContext
-    {
+    public class ShopDBcontext : IdentityDbContext<User>
+	{
         public DbSet<Product> products { get; set; }
         public DbSet<Category> categories { get; set; }
         public ShopDBcontext(DbContextOptions options) : base(options) {  }

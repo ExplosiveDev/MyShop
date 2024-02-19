@@ -40,6 +40,8 @@ namespace MyShop.Controllers
 			}
 			return View(data);
 		}
+
+        [HttpPost]
 		public async Task<IActionResult> ViewInformationOfProduct(int ProductId)
         {
             var prod = await _products.GetById(ProductId);
