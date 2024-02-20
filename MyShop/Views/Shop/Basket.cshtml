@@ -6,37 +6,44 @@
 	foreach (var item in Model.Products)
 	{
 		<div class="row mb-1">
+
 			<div class="col-1 border align-items-center justify-content-center d-flex">
 				<h1 class="h1" style="font-size:400%;">#@i</h1>
 			</div>
+
 			<div class="col-3 border border-end-0 justify-content-center d-flex">
 				<img src="@item.ImagePath" style="max-width:200px; min-width:200px;" />
 			</div>
 
 			<div class="col-4 border border-start-0 align-items-center justify-content-center d-flex">
 				<div class="row">
+
 					<div class="col-12">
 						<h2 class="d-flex" style="color:#0e5ae8;">@item.Name</h2>
 					</div>
 					<div class="col-12 text-center">
 						<h2 class="d-flex" style="color:#1da10b;">@item.Price₴</h2>
 					</div>
+
 				</div>
 			</div>
 
 			<div class="col-4 border align-items-center justify-content-center d-flex p-0">
 				<div class="row col-12 h-100">
-					<div class="col-12 d-flex flex-row align-items-center justify-content-center d-flex">
-						<div class="col-4 justify-content-center d-flex"><button class="btn btn-primary w-75" type="submit">Button</button></div>
-						<div class="col-4 justify-content-center d-flex">dfsdf</div>
-						<div class="col-4 justify-content-center d-flex"><button class="btn btn-primary w-75" type="submit">Button</button></div>
+
+					<div class="col-4 align-items-center justify-content-center d-flex">
+						<input type="number" class="h-100 w-100 text-center" value="1" min="1" style="font-size:300%"  />
 					</div>
-					<div class="col-12 border-top align-items-center justify-content-center d-flex">
-						<button class="btn btn-danger w-75" type="submit">Remove</button>
+
+					<div class="col-8 align-items-center justify-content-center d-flex">
+						<form class="align-items-center justify-content-center h-100 w-100" asp-action="RemoveFromBasket" asp-controller="Shop" method="post">
+							<input type="hidden" class="d-none" name="ProductId" value="@item.Id" />
+							<button class="btn btn-danger w-100 h-100" type="submit">Remove</button>
+						</form>
 					</div>
+
 				</div>
 			</div>
-
 		</div>
 		i++;
 	}
