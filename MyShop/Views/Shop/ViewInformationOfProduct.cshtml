@@ -22,9 +22,9 @@
 			<form asp-action="AddInBasket" asp-controller="Shop" method="post">
 				<div class="d-flex justify-content-center">
 					<input hidden class="d-none" value="@Model.Id" name="ProductId" />
-					<input hidden class="d-none" value="@user.UserName" name="UserName" />
 					@if(SignInManager.IsSignedIn(User)){
 						<button id="SaveInCart" type="submit" class=" btn w-50 btn-success">In card</button>
+						<input hidden class="d-none" value="@user.UserName" name="UserName" />
 					}else{
 						<button type="submit" class=" btn w-50 btn-success disabled">In card</button>
 					}
