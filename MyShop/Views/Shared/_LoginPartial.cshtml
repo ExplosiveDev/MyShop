@@ -13,6 +13,7 @@
 {
     <li class="nav-item d-flex align-items-center">
             <a asp-action="Basket" asp-controller="Shop">
+                <input hidden class="d-none" value="@user.UserName" name="UserName" />
                 <img src="~/icon/basket.png" style="width:30px; height:30px;" />
             </a>
     </li>

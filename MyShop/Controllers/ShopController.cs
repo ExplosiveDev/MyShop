@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic.DTOs;
+using BusinessLogic.Interfaces;
 using DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,7 @@ namespace MyShop.Controllers
 {
     public class ShopController : Controller
     {
+        SignInManager<User> _signInManager;
         private readonly IProductService _products;
         private readonly ICategoryService _category;
         private readonly IBasketService _basket;
@@ -57,6 +59,13 @@ namespace MyShop.Controllers
             await _basket.AddInBasket(ProductId, UserName);
             return RedirectToAction("ViewAllProducts");
 		}
+		public async Task<IActionResult> Basket()    
+        {
+            var UserName = HttpContext.User.Identity.Name;
+            BasketDTO basket = _basket.GetBasket(UserName).Result;
+            return View(basket);
+        }
 
-    }
+
+	}
 }
