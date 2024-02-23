@@ -12,7 +12,7 @@ namespace BusinessLogic.Interfaces
 		Task<BasketDTO> GetBasket(string UserName);
 		Task AddInBasket(int ProductId, string UserName);
 		Task DeleteFromBasket(int BasketId);
-		Task PlusCount(int Id, string UserName);
-		Task MinusCount(int Id, string UserName);
+		Task PlusCount(int ProductId, string UserName);
+		Task MinusCount(int ProductId, string UserName);
 	}
 }

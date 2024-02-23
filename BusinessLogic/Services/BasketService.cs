@@ -54,16 +54,16 @@ namespace BusinessLogic.Services
 				Basket NewBasket = new Basket();
 				NewBasket.UserName = UserName;
 				await _basketRepository.Insert(NewBasket);
-				GetUserBasket(UserName);
+				return NewBasket;
 			}
 			return basket;
 		}
-		public async Task MinusCount(int Id, string UserName)
+		public async Task MinusCount(int ProductId, string UserName)
 		{
 			Basket basket = GetUserBasket(UserName).Result;
 			foreach (var item in basket.Products)
 			{
-				if(item.ProductId == Id)
+				if(item.ProductId == ProductId)
 				{
 					if (item.BasketCount > 1)item.BasketCount--;
 					await _basketRepository.Update(basket);
@@ -71,12 +71,12 @@ namespace BusinessLogic.Services
 			}
 		}
 
-		public async Task PlusCount(int Id, string UserName)
+		public async Task PlusCount(int ProductId, string UserName)
 		{
 			Basket basket = GetUserBasket(UserName).Result;
 			foreach (var item in basket.Products)
 			{
-				if (item.ProductId == Id)
+				if (item.ProductId == ProductId)
 				{
 					item.BasketCount++;
 					await _basketRepository.Update(basket);
