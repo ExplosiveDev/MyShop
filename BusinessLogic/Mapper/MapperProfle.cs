@@ -15,6 +15,9 @@ namespace BusinessLogic.Mapper
             CreateMap<Product, ProductDTO>().ForMember(dto => dto.CategoryName, opt => opt.MapFrom(o => o.Category!.Name)).ReverseMap();
             CreateMap<CategoryDTO, Category>().ForMember(opt => opt.Products, dto => dto.Ignore()).ReverseMap();
             CreateMap<Basket, BasketDTO>().ReverseMap();
+            CreateMap<Product, ProductInBasket>().ForMember(basket => basket.ProductId, prod => prod.MapFrom(x => x.Id))
+                .ForMember(basket => basket.Id, opt => opt.Ignore())
+                .ReverseMap();
         }
     }
 }

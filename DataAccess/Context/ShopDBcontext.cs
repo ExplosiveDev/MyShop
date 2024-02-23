@@ -15,6 +15,7 @@ namespace DataAccess.Context
         public DbSet<Product> products { get; set; }
         public DbSet<Category> categories { get; set; }
         public DbSet<Basket> baskets { get; set; }
+        public DbSet<ProductInBasket> productInBaskets { get; set; }
 
         public ShopDBcontext(DbContextOptions options) : base(options) {  }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

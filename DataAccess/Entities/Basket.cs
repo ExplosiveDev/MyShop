@@ -11,6 +11,6 @@ namespace DataAccess.Entities
     {
         public int Id { get; set; }
         public string UserName { get; set; }
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<ProductInBasket> Products { get; set; } = new List<ProductInBasket>();
     }
 }

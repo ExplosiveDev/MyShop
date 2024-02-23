@@ -28,7 +28,8 @@ namespace BusinessLogic.Services
 			var basket = GetUserBasket(UserName).Result;
 			if(basket.Products.Where(x => x.Id == ProductId).FirstOrDefault() == null) 
 			{
-                basket.Products.Add(await _productRepository.GetByID(ProductId));
+                var product = await _productRepository.GetByID(ProductId);
+				basket.Products.Add(_mapper.Map<ProductInBasket>(product));
                 await _basketRepository.Update(basket);
             }
 
@@ -53,7 +54,7 @@ namespace BusinessLogic.Services
 				Basket NewBasket = new Basket();
 				NewBasket.UserName = UserName;
 				await _basketRepository.Insert(NewBasket);
-				await GetUserBasket(UserName);
+				GetUserBasket(UserName);
 			}
 			return basket;
 		}
@@ -62,10 +63,10 @@ namespace BusinessLogic.Services
 			Basket basket = GetUserBasket(UserName).Result;
 			foreach (var item in basket.Products)
 			{
-				if(item.Id == Id)
+				if(item.ProductId == Id)
 				{
 					if (item.BasketCount > 1)item.BasketCount--;
-					await _productRepository.Update(item);
+					await _basketRepository.Update(basket);
 				}
 			}
 		}
@@ -75,10 +76,11 @@ namespace BusinessLogic.Services
 			Basket basket = GetUserBasket(UserName).Result;
 			foreach (var item in basket.Products)
 			{
-				if (item.Id == Id)
+				if (item.ProductId == Id)
 				{
 					item.BasketCount++;
-					await _productRepository.Update(item);
+					await _basketRepository.Update(basket);
+
 				}
 			}
 		}

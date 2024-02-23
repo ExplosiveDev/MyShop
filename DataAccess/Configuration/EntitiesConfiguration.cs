@@ -42,7 +42,7 @@ namespace DataAccess.Configuration
             builder.HasKey(x => x.Id);
 
             builder.HasMany(x => x.Products)
-                .WithMany(x => x.Baskets);
+                .WithOne(x => x.Basket);
 
         }
     }

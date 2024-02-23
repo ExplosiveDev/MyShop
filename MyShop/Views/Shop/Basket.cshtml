@@ -35,7 +35,7 @@
 						<form class="align-items-center justify-content-center h-100 w-100 d-flex flex-row" method="post"
 							  asp-action="MinusCountBasket" asp-controller="Shop">
 							<div class="col-4 d-flex justify-content-center align-items-center w-75">
-								<input type="hidden" class="d-none" name="ProductId" value="@item.Id" />
+								<input type="hidden" class="d-none" name="ProductId" value="@item.ProductId" />
 								<button class="btn btn-primary w-100 h-100 fs-2" type="submit">-</button>
 							</div>
 						</form>
@@ -45,7 +45,7 @@
 						<form class="align-items-center justify-content-center h-100 w-100 d-flex flex-row" method="post"
 							  asp-action="PlusCountBasket" asp-controller="Shop">
 							<div class="col-4 d-flex justify-content-center align-items-center w-75">
-								<input type="hidden" class="d-none" name="ProductId" value="@item.Id" />
+								<input type="hidden" class="d-none" name="ProductId" value="@item.ProductId" />
 								<button class="btn btn-primary w-100 h-100 fs-2" type="submit">+</button>
 							</div>
 						</form>

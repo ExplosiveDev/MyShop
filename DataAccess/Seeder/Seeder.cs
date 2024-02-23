@@ -14,8 +14,7 @@ namespace DataAccess.Seeder
                     Price=28999,
                     ImagePath=@"https://content2.rozetka.com.ua/goods/images/big/343096346.jpg",
                     CategoryId=1,
-                    Count = 1,
-                    BasketCount = 1
+                    Count = 1
                 },
                 new Product(){
                     Id=2,
@@ -24,8 +23,7 @@ namespace DataAccess.Seeder
                     Price=16588,
                     ImagePath=@"https://content2.rozetka.com.ua/goods/images/big/347802389.jpg",
                     CategoryId=1,
-					Count = 1,
-					BasketCount = 1
+					Count = 1
 				},
                  new Product(){
                     Id=3,
@@ -34,8 +32,7 @@ namespace DataAccess.Seeder
                     Price=19999,
                     ImagePath=@"https://content1.rozetka.com.ua/goods/images/big/334484472.jpg",
                     CategoryId=1,
-					Count = 1,
-					BasketCount = 1
+					Count = 1
 				},
                 new Product(){
                     Id=4,
@@ -44,8 +41,7 @@ namespace DataAccess.Seeder
                     Price=42788,
                     ImagePath=@"https://content1.rozetka.com.ua/goods/images/big/342769719.jpg",
                     CategoryId=1,
-					Count = 1,
-					BasketCount = 1
+					Count = 1
 				},
                 new Product(){
                     Id=5,
@@ -54,8 +50,7 @@ namespace DataAccess.Seeder
                     Price=8999,
                     ImagePath=@"https://content.rozetka.com.ua/goods/images/big/328132324.jpg",
                     CategoryId=2,
-                    Count = 1,
-					BasketCount = 1
+                    Count = 1
 				},
                 new Product(){
                     Id=6,
@@ -64,8 +59,7 @@ namespace DataAccess.Seeder
                     Price=36999,
                     ImagePath=@"https://content1.rozetka.com.ua/goods/images/big/284913535.jpg",
                     CategoryId=2,
-                    Count = 1,
-					BasketCount = 1
+                    Count = 1
 				}
             };
         }

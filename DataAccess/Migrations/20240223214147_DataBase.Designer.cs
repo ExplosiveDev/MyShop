@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ShopDBcontext))]
-    [Migration("20240223195047_add_count")]
-    partial class add_count
+    [Migration("20240223214147_DataBase")]
+    partial class DataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,21 +24,6 @@ namespace DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("BasketProduct", b =>
-                {
-                    b.Property<int>("BasketsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("BasketsId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("BasketProduct");
-                });
 
             modelBuilder.Entity("DataAccess.Entities.Basket", b =>
                 {
@@ -99,9 +84,6 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("BasketCount")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -131,9 +113,8 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            BasketCount = 0,
                             CategoryId = 1,
-                            Count = 0,
+                            Count = 1,
                             Description = "A715-42G-R3EZ (NH.QBFEU.00C) Charcoal Black / AMD Ryzen 5 5500U / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce GTX 1650",
                             ImagePath = "https://content2.rozetka.com.ua/goods/images/big/343096346.jpg",
                             Name = "Ноутбук Acer Aspire 7",
@@ -142,9 +123,8 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            BasketCount = 0,
                             CategoryId = 1,
-                            Count = 0,
+                            Count = 1,
                             Description = "X515EA-BQ2066 (90NB0TY1-M00VF0) Slate Grey / 15.6\" IPS Full HD / Intel Core i3-1115G4 / RAM 12 ГБ / SSD 512 ГБ",
                             ImagePath = "https://content2.rozetka.com.ua/goods/images/big/347802389.jpg",
                             Name = "Ноутбук ASUS Laptop",
@@ -153,9 +133,8 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            BasketCount = 0,
                             CategoryId = 1,
-                            Count = 0,
+                            Count = 1,
                             Description = "Екран 15.6\" IPS (1920x1080) Full HD, матовий / AMD Ryzen 3 7320U (2.4 - 4.1 ГГц) / RAM 16 ГБ / SSD 512 ГБ / AMD Radeon 610M Graphics / без ОД / Wi-Fi / Bluetooth / веб-камера / без ОС / 1.58 кг / сірий",
                             ImagePath = "https://content1.rozetka.com.ua/goods/images/big/334484472.jpg",
                             Name = "Ноутбук Lenovo IdeaPad 1",
@@ -164,9 +143,8 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 4,
-                            BasketCount = 0,
                             CategoryId = 1,
-                            Count = 0,
+                            Count = 1,
                             Description = "A715-42G-R3EZ (NH.QBFEU.00C) Charcoal Black / AMD Ryzen 5 5500U / RAM 16 ГБ / SSD 512 ГБ / nVidia GeForce GTX 1650",
                             ImagePath = "https://content1.rozetka.com.ua/goods/images/big/342769719.jpg",
                             Name = "Ноутбук Acer Aspire 5",
@@ -175,9 +153,8 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 5,
-                            BasketCount = 0,
                             CategoryId = 2,
-                            Count = 0,
+                            Count = 1,
                             Description = "Екран (6.5\", Super AMOLED, 2340x1080) / Mediatek Helio G99 (2 x 2.6 ГГц + 6 x 2.0 ГГц) / основна потрійна камера: 50 Мп + 5 Мп + 2 Мп, фронтальна камера: 13 Мп / RAM2 ГБ вбудованої пам'яті + microSD (до 1 ТБ) / 3G / LTE / GPS / ГЛОНАСС / BDS / підтримка 2х SIM-карток (Nano-SIM) / Android 13 / 5000 мА * год",
                             ImagePath = "https://content.rozetka.com.ua/goods/images/big/328132324.jpg",
                             Name = "Смартфон Samsung Galaxy A24",
@@ -186,14 +163,53 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 6,
-                            BasketCount = 0,
                             CategoryId = 2,
-                            Count = 0,
+                            Count = 1,
                             Description = "Екран (6.1\", OLED (Super Retina XDR), 2532x1170) / Apple A15 Bionic / подвійна основна камера: 12 Мп + 12 Мп, фронтальна камера: 12 Мп / 128 ГБ вбудованої пам'яті / 3G / LTE / 5G / GPS / підтримка 2 SIM-карток (eSIM) / iOS 16\r\n\r\n",
                             ImagePath = "https://content1.rozetka.com.ua/goods/images/big/284913535.jpg",
                             Name = "Смартфон Apple iPhone 14",
                             Price = 36999m
                         });
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.ProductInBasket", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BasketCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BasketId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.ToTable("productInBaskets");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.User", b =>
@@ -409,21 +425,6 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BasketProduct", b =>
-                {
-                    b.HasOne("DataAccess.Entities.Basket", null)
-                        .WithMany()
-                        .HasForeignKey("BasketsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DataAccess.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("DataAccess.Entities.Product", b =>
                 {
                     b.HasOne("DataAccess.Entities.Category", "Category")
@@ -433,6 +434,17 @@ namespace DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.ProductInBasket", b =>
+                {
+                    b.HasOne("DataAccess.Entities.Basket", "Basket")
+                        .WithMany("Products")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -484,6 +496,11 @@ namespace DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DataAccess.Entities.Basket", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("DataAccess.Entities.Category", b =>
