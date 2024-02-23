@@ -4,6 +4,7 @@ using DataAccess.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.Language;
 using MyShop.Interfaces;
 using MyShop.Models;
 
@@ -65,6 +66,18 @@ namespace MyShop.Controllers
             BasketDTO basket = _basket.GetBasket(UserName).Result;
             return View(basket);
         }
+		public async Task<IActionResult> MinusCountBasket(int ProductId)
+		{
+			var UserName = HttpContext.User.Identity.Name;
+			await _basket.MinusCount(ProductId, UserName);
+            return RedirectToAction("Basket");
+		}
+		public async Task<IActionResult> PlusCountBasket(int ProductId)
+		{
+			var UserName = HttpContext.User.Identity.Name;
+			await _basket.PlusCount(ProductId, UserName);
+			return RedirectToAction("Basket");
+		}
 
 
 	}

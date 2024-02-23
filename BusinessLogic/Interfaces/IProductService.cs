@@ -7,5 +7,6 @@ namespace MyShop.Interfaces
     {
         Task<IEnumerable<ProductDTO>> GetAll();
         Task<ProductDTO> GetById(int Id);
+
     }
 }

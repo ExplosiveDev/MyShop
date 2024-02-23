@@ -15,7 +15,9 @@ namespace DataAccess.Entities
         public decimal Price { get; set; }
         public string? ImagePath { get; set; }
         public int CategoryId { get; set; }
-        public Category? Category { get; set; }
+		public int Count { get; set; }
+		public int BasketCount { get; set; }
+		public Category? Category { get; set; }
         public ICollection<Basket> Baskets { get; set; }
     }
 }
