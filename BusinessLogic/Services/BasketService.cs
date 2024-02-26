@@ -6,6 +6,7 @@ using DataAccess.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,9 +36,18 @@ namespace BusinessLogic.Services
 
 		}
 
-		public async Task DeleteFromBasket(int BasketId)
+		public async Task DeleteFromBasket(int ProductId, string UserName)
 		{
-			await _basketRepository.Delete(BasketId);
+			var basket = GetUserBasket(UserName).Result;
+			foreach (var product in basket.Products)
+			{
+				if (product.Id == ProductId)
+				{
+					basket.Products.Remove(product);
+					break;
+				}
+			}
+			await _basketRepository.Update(basket);
 		}
 
 		public async Task<BasketDTO> GetBasket(string UserName)
@@ -48,7 +58,7 @@ namespace BusinessLogic.Services
 		private async Task<Basket> GetUserBasket(string UserName)
 		{
             var baskets = await _basketRepository.Get(includeProperties: new[] { "Products" });
-            Basket basket = baskets.FirstOrDefault(x => x.UserName == UserName);
+            Basket basket = baskets.FirstOrDefault(x => x.UserName == UserName && x.Active == true);
             if (basket == null)
 			{
 				Basket NewBasket = new Basket();
@@ -83,6 +93,13 @@ namespace BusinessLogic.Services
 
 				}
 			}
+		}
+
+		public async Task CloseBasket(string UserName)
+		{
+			Basket basket = GetUserBasket(UserName).Result;
+			basket.Active = false;
+			await _basketRepository.Update(basket);
 		}
 	}
 }
