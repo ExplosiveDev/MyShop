@@ -22,6 +22,9 @@ namespace DataAccess.Configuration
                    .WithMany(x => x.Products)
                    .HasForeignKey(x => x.CategoryId);
 
+            builder.HasMany(x => x.Comments)
+                    .WithMany(x => x.Products);
+
         }
 		public void Configure(EntityTypeBuilder<User> builder)
 		{
@@ -43,6 +46,30 @@ namespace DataAccess.Configuration
 
             builder.HasMany(x => x.Products)
                 .WithOne(x => x.Basket);
+
+        }
+        public void Configure(EntityTypeBuilder<Order> builder)
+        {
+
+            builder.HasKey(x => x.Id);
+
+            builder.HasOne(x => x.Basket)
+                .WithMany(x => x.Order)
+                .HasForeignKey(x => x.BasketId);
+
+        }
+        public void Configure(EntityTypeBuilder<Comments> builder)
+        {
+
+            builder.HasKey(x => x.Id);
+
+            builder.HasOne(x => x.User)
+                .WithMany(x => x.Comments)
+                .HasForeignKey(x => x.UserId);
+            
+
+            builder.HasMany(x => x.Products)
+                .WithMany(x => x.Comments);
 
         }
     }

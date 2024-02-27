@@ -12,5 +12,6 @@ namespace DataAccess.Entities
 		public string FirstName { get; set; } = string.Empty;
 		public string LastName { get; set; } = string.Empty;
 		public DateTime BirthDate { get; set; }
-	}
+        public IEnumerable<Comments> Comments { get; set; }
+    }
 }

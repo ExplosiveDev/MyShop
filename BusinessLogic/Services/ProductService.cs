@@ -18,14 +18,14 @@ namespace MyShop.Services
         }
         public async Task<IEnumerable<ProductDTO>> GetAll()
         {
-            var products = await _productRepository.Get(includeProperties: new[] { "Category" });
+            var products = await _productRepository.Get(includeProperties: new[] { "Category","Comments" });
             return _mapper.Map<IEnumerable<ProductDTO>>(products);
         }
 
         public async Task<ProductDTO> GetById(int Id)
         {
-            var b = await GetAll();
-            return b.FirstOrDefault(x => x.Id == Id);
+            var products = await GetAll();
+            return products.FirstOrDefault(x => x.Id == Id);
         }
 	}
 }

@@ -18,5 +18,6 @@ namespace BusinessLogic.DTOs
 		public int Count { get; set; }
 		public int BasketCount { get; set; }
 		public string? CategoryName { get; set; }
-    }
+		public IEnumerable<Comments> Comments { get; set; }
+	}
 }

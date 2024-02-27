@@ -17,5 +17,6 @@ namespace DataAccess.Entities
         public int CategoryId { get; set; }
 		public int Count { get; set; }
 		public Category? Category { get; set; }
+        public IEnumerable<Comments> Comments { get; set; }
     }
 }
