@@ -95,7 +95,7 @@ namespace MyShop.Controllers
 			return RedirectToAction("Basket");
 		}
 
-		
+
 
 	}
 }
